@@ -17,27 +17,27 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
 
-    await message.reply(" Wiki botga xush kelibsiz! ")
+    await message.reply(" Welcome to Wiki Bot! ")
 
 
 # 2-handler
-@dp.message_handler(commands=['yordam','help'])
+@dp.message_handler(commands=['help'])
 async def send_welcome(message: types.Message):
 
-    await message.answer("Bu bot Wikipediadan ma'lumotlarni sizga taqdim etadi!")
+    await message.answer("This bot provides you with information from Wikipedia!")
 
 # 3-handler
 @dp.message_handler()
 async def echo(message: types.Message):
 
-    matn =message.text
+    text = message.text
     #if matn==int:
-    #    javob="Siz raqam yubordingiz matn"
+    #    answer="You sent a number"
     try:
-        javob = wikipedia.summary(matn)
-        await message.answer(javob)
+        answer = wikipedia.summary(text)
+        await message.answer(answer)
     except:
-        await message.answer("Bu mavzuga doir maqola topilmadi.\nQayta urinib ko'ring!")
+        await message.answer("No articles were found for this topic.\nTry again!")
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
